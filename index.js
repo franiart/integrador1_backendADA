@@ -17,7 +17,7 @@ const libros = [
         id: 1,
         titulo: " El Señor de los Anillos ",
         autor: "J.R.R. Tolkien",
-        año: 1954,
+        anio: 1954,
         genero: "Fantasía",
         disponible: true
     },
@@ -26,7 +26,7 @@ const libros = [
         id: 2,
         titulo: " El Código Da Vinci ",
         autor: "Dan Brown",
-        año: 2003,
+        anio: 2003,
         genero: "Misterio",
         disponible: true
     },
@@ -35,7 +35,7 @@ const libros = [
         id: 3,
         titulo: " El Padrino ",
         autor: "Mario Puzo",
-        año: 1969,
+        anio: 1969,
         genero: "Drama",
         disponible: true
     },
@@ -44,12 +44,12 @@ const libros = [
         id: 4,
         titulo: " El Nombre del Viento ",
         autor: "Patrick Rothfuss",
-        año: 2007,
+        anio: 2007,
         genero: "Fantasía",
         disponible: true
     },
     {
-        id: 7,
+        id: 5,
         titulo: "   1984  ",
         autor: "George Orwell",
         anio: 1949,
@@ -57,7 +57,7 @@ const libros = [
         disponible: false
     },
     {
-        id: 8,
+        id: 6,
         titulo: " El Hobbit ",
         autor: "J.R.R. Tolkien",
         anio: 1937,
@@ -65,7 +65,7 @@ const libros = [
         disponible: true
     },
     {
-        id: 9,
+        id: 7,
         titulo: " Fahrenheit 451 ",
         autor: "Ray Bradbury",
         anio: 1953,
@@ -73,7 +73,7 @@ const libros = [
         disponible: false
     },
     {
-        id: 10,
+        id: 8,
         titulo: " Guerra y paz ",
         autor: "León Tolstói",
         anio: 1869,
@@ -82,7 +82,7 @@ const libros = [
     },
 
     {
-        id: 11,
+        id: 9,
         titulo: " JavaScript: The Good Parts ",
         autor: "Douglas Crockford",
         anio: 2008,
@@ -91,7 +91,7 @@ const libros = [
     },
 
     {
-        id: 12,
+        id: 10,
         titulo: " Eloquent JavaScript, 3rd Edition ",
         autor: "Marijn Haverbeke",
         anio: 2018,
@@ -100,7 +100,7 @@ const libros = [
     },
 
     {
-        id: 13,
+        id: 11,
         titulo: " You Don't Know JS: ES6 & Beyond ",
         autor: "Kyle Simpson",
         anio: 2015,
@@ -109,8 +109,8 @@ const libros = [
     },
 
     {
-        id: 14,
-        titulo: "Clean Code: A Handbook of Agile Software Craftsmanship",
+        id: 12,
+        titulo: " Clean Code: A Handbook of Agile Software Craftsmanship ",
         autor: "Robert C. Martin",
         anio: 2008,
         genero: "Programación",
@@ -118,8 +118,8 @@ const libros = [
     },
 
     {
-        id: 15,
-        titulo: "The Pragmatic Programmer: Your Journey to Mastery",
+        id: 13,
+        titulo: " The Pragmatic Programmer: Your Journey to Mastery ",
         autor: "Andrew Hunt, David Thomas",
         anio: 1999,
         genero: "Programación",
@@ -209,3 +209,69 @@ let usuarios = [
     }
 ];
 
+
+///////////////////////////////////////////
+// Funciones de Gestión de Libros
+//////////////////////////////////////////
+
+/*
+Implementar una función agregarLibro(id, titulo, autor, anio, genero)
+que agregue un nuevo libro al array libros.
+*/
+const agregarLibro = (id, titulo, autor, anio, genero) => libros.push({id, titulo, autor, anio, genero});
+console.log(agregarLibro(16, "hora loca", "juan carlos", 1678, "ficcion"));
+
+/*
+Crear una función buscarLibro(criterio, valor) que permita buscar
+libros por título, autor o género utilizando el algoritmo de búsqueda
+lineal.
+*/
+const buscarLibro = (criterio, valor) => libros.find(libro => libro[criterio] === valor);
+console.log(buscarLibro("titulo", "hora loca"));
+
+/*
+Desarrollar una función ordenarLibros(criterio) que ordene los libros
+por título o año utilizando el algoritmo de ordenamiento burbuja
+(bubble sort) y luego muestre los libros ordenados en la consola.
+*/
+const ordenarLibros = (criterio) => {
+    for (let i = 0; i < libros.length - 1; i++) {
+        for (let j = 0; j < libros.length - i - 1; j++) {
+            if (criterio === 'titulo') {
+                if (libros[j].titulo.toLowerCase() > libros[j + 1].titulo.toLowerCase()) {
+                    let temp = libros[j];
+                    libros[j] = libros[j + 1];
+                    libros[j + 1] = temp;
+                }
+            } else if (criterio === 'anio') {
+                if (libros[j].anio > libros[j + 1].anio) {
+                    let temp = libros[j];
+                    libros[j] = libros[j + 1];
+                    libros[j + 1] = temp;
+                }
+            }
+        }
+    }
+    
+    return libros
+}
+
+console.log(ordenarLibros("titulo"));
+
+/*
+Desarrollar una función borrarLibro(id) que elimine el libro que se le
+pase por parámetro.
+*/
+const borrarLibro = (id) => {
+    const index = libros.map(libro => libro.id).indexOf(id);
+    if (index !== -1) {
+        libros.splice(index, 1);
+        console.log(`El libro con id ${id} ha sido eliminado`);
+    } else {
+        console.log(`El libro con id ${id} no se ha encontrado`);
+    }
+
+    return libros
+}
+
+console.log(borrarLibro(5));
