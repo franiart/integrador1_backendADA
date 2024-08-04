@@ -211,7 +211,7 @@ let usuarios = [
 
 
 ///////////////////////////////////////////
-// Funciones de Gestión de Libros
+// 2. Funciones de Gestión de Libros
 //////////////////////////////////////////
 
 /*
@@ -275,3 +275,45 @@ const borrarLibro = (id) => {
 }
 
 console.log(borrarLibro(5));
+
+///////////////////////////////////////////
+// 3. Gestión de Usuarios
+//////////////////////////////////////////
+
+/*
+Implementar una función registrarUsuario(nombre, email) que
+agregue un nuevo usuario al array usuarios.
+*/
+const registrarUsuario = (nombre, email) => usuarios.push({nombre, email});
+
+/*
+Implementar una función mostrarTodosLosUsuarios() que me
+devuelva el array completo de usuarios
+*/
+const mostrarTodosLosUsuarios = (usuarios) => usuarios
+
+/*
+Crear una función buscarUsuario(email) que devuelva la información
+de un usuario dado su email.
+*/
+const buscarUsuario = (email) => usuarios.find(usuario => usuario.email === email);
+
+/*
+Implementar una función borrarUsuario(nombre, email) que elimine el
+usuario seleccionado.
+*/
+const borrarUsuario = (nombre, email) => {
+    const index = usuarios.findIndex(usuario => usuario.nombre === nombre && usuario.email === email);
+    if (index !== -1) {
+        usuarios.splice(index, 1);
+        console.log(`El usuario ${nombre} con email ${email} ha sido eliminado`);
+    } else {
+        console.log(`El usuario ${nombre} con email ${email} no se ha encontrado`);
+    }
+}
+
+
+
+
+
+
