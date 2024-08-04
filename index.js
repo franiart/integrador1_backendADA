@@ -46,7 +46,7 @@ const libros = [
         autor: "Patrick Rothfuss",
         anio: 2007,
         genero: "Fantasía",
-        disponible: true
+        disponible: false
     },
     {
         id: 5,
@@ -312,8 +312,44 @@ const borrarUsuario = (nombre, email) => {
     }
 }
 
+///////////////////////////////////////////
+// 4. Sistema de Préstamos
+//////////////////////////////////////////
 
+/*
+Desarrollar una función prestarLibro(idLibro, idUsuario) que marque
+un libro como no disponible y lo agregue a la lista de libros prestados
+del usuario.
+*/
+const prestarLibro = (idLibro, idUsuario) => {
+    const book = libros.find(libro => libro.id === idLibro);
+    const user = usuarios.find(usuario => usuario.id === idUsuario);
+    
+    if (book.disponible){
+        book.disponible = false;
+        user.librosPrestados.push(idLibro);
+        console.log(`El libro ${book.titulo} ha sido prestado al usuario ${user.nombre}`);
+    } else {
+        console.log(`El libro ${book.titulo} ya está prestado`);
+    }
+}
 
+/*
+Implementar una función devolverLibro(idLibro, idUsuario) que
+marque un libro como disponible y lo elimine de la lista de libros
+prestados del usuario.
+*/
 
+const devolverLibro = (idLibro, idUsuario) => {
+    const book = libros.find(libro => libro.id === idLibro);
+    const user = usuarios.find(usuario => usuario.id === idUsuario);
 
+    if(!book.disponible){
+        book.disponible = true;
+        user.librosPrestados = user.librosPrestados.splice(idLibro, 1);
+        return `El libro ${book.titulo} ha sido devuelto por el usuario ${user.nombre}`;
+    } else {
+        return `El libro ${book.titulo} ya está disponible`;
+    }
+}
 
