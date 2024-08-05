@@ -480,7 +480,12 @@ autores.
 
 const normalizarDatos = () => {
     const titulosAMayuscula = libros.map(libro => libro.titulo.toUpperCase());
-    console.log(titulosAMayuscula);
-    
+    const eliminarEspaciosEnBlanco = libros.map(libro => libro.autor.trim());
+    const emailAMinusculas = usuarios.map(usuario => usuario.email.toLowerCase());
+
+    return {
+        titulosAMayuscula,
+        eliminarEspaciosEnBlanco,
+        emailAMinusculas
+    }
 }
-normalizarDatos()
