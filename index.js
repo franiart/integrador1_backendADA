@@ -15,8 +15,8 @@ libros. Cada libro debe tener las siguientes propiedades:
 const libros = [
     {
         id: 1,
-        titulo: " El Señor de los Anillos ",
-        autor: "J.R.R. Tolkien",
+        titulo: "El Señor de los Anillos",
+        autor: " J.R.R. Tolkien ",
         anio: 1954,
         genero: "Fantasía",
         disponible: true
@@ -24,8 +24,8 @@ const libros = [
 
     {
         id: 2,
-        titulo: " El Código Da Vinci ",
-        autor: "Dan Brown",
+        titulo: "El Código Da Vinci",
+        autor: " Dan Brown ",
         anio: 2003,
         genero: "Misterio",
         disponible: true
@@ -33,8 +33,8 @@ const libros = [
 
     {
         id: 3,
-        titulo: " El Padrino ",
-        autor: "Mario Puzo",
+        titulo: "El Padrino",
+        autor: " Mario Puzo ",
         anio: 1969,
         genero: "Drama",
         disponible: true
@@ -42,40 +42,40 @@ const libros = [
 
     {
         id: 4,
-        titulo: " El Nombre del Viento ",
-        autor: "Patrick Rothfuss",
+        titulo: "El Nombre del Viento",
+        autor: " Patrick Rothfuss ",
         anio: 2007,
         genero: "Fantasía",
         disponible: false
     },
     {
         id: 5,
-        titulo: " 1984 ",
-        autor: "George Orwell",
+        titulo: "1984",
+        autor: " George Orwell ",
         anio: 1949,
         genero: "Distopía",
         disponible: false
     },
     {
         id: 6,
-        titulo: " El Hobbit ",
-        autor: "J.R.R. Tolkien",
+        titulo: "El Hobbit",
+        autor: " J.R.R. Tolkien ",
         anio: 1937,
         genero: "Fantasía",
         disponible: true
     },
     {
         id: 7,
-        titulo: " Fahrenheit 451 ",
-        autor: "Ray Bradbury",
+        titulo: "Fahrenheit 451",
+        autor: " Ray Bradbury ",
         anio: 1953,
         genero: "Distopía",
         disponible: false
     },
     {
         id: 8,
-        titulo: " Guerra y paz ",
-        autor: "León Tolstói",
+        titulo: "Guerra y paz",
+        autor: " León Tolstói ",
         anio: 1869,
         genero: "Novela histórica",
         disponible: true
@@ -83,8 +83,8 @@ const libros = [
 
     {
         id: 9,
-        titulo: " JavaScript: The Good Parts ",
-        autor: "Douglas Crockford",
+        titulo: "JavaScript: The Good Parts",
+        autor: " Douglas Crockford ",
         anio: 2008,
         genero: "Programación",
         disponible: true
@@ -92,8 +92,8 @@ const libros = [
 
     {
         id: 10,
-        titulo: " Eloquent JavaScript, 3rd Edition ",
-        autor: "Marijn Haverbeke",
+        titulo: "Eloquent JavaScript, 3rd Edition",
+        autor: " Marijn Haverbeke ",
         anio: 2018,
         genero: "Programación",
         disponible: true
@@ -101,8 +101,8 @@ const libros = [
 
     {
         id: 11,
-        titulo: " You Don't Know JS: ES6 & Beyond ",
-        autor: "Kyle Simpson",
+        titulo: "You Don't Know JS: ES6 & Beyond",
+        autor: " Kyle Simpson ",
         anio: 2015,
         genero: "Programación",
         disponible: true
@@ -110,8 +110,8 @@ const libros = [
 
     {
         id: 12,
-        titulo: " Clean Code: A Handbook of Agile Software Craftsmanship ",
-        autor: "Robert C. Martin",
+        titulo: "Clean Code: A Handbook of Agile Software Craftsmanship",
+        autor: " Robert C. Martin ",
         anio: 2008,
         genero: "Programación",
         disponible: true
@@ -119,8 +119,8 @@ const libros = [
 
     {
         id: 13,
-        titulo: " The Pragmatic Programmer: Your Journey to Mastery ",
-        autor: "Andrew Hunt, David Thomas",
+        titulo: "The Pragmatic Programmer: Your Journey to Mastery",
+        autor: " Andrew Hunt, David Thomas ",
         anio: 1999,
         genero: "Programación",
         disponible: true
@@ -141,70 +141,70 @@ let usuarios = [
     {
         id: 1,
         nombre: "Tony",
-        email: "tony@gmail.com",
+        email: "TONY@GMAIL.COM",
         librosPrestados: [1, 5]
     },
 
     {
         id: 2,
         nombre: "Magenta",
-        email: "magenta@gmail.com",
+        email: "MAGENTA@GMAIL.COM",
         librosPrestados: [2, 6]
     },
 
     {
         id: 3,
         nombre: "Daniel",
-        email: "daniel@gmail.com",
+        email: "DANIEL@GMAIL.COM",
         librosPrestados: [4, 8]
     },
 
     {
         id: 4,
         nombre: "Luis",
-        email: "luis@gmail.com",
+        email: "LUIS@GMAIL.COM",
         librosPrestados: [9, 10]
     },
 
     {
         id: 5,
         nombre: "Ana",
-        email: "ana@gmail.com",
+        email: "ANA@GMAIL.COM",
         librosPrestados: []
     },
 
     {
         id: 6,
         nombre: "Carlos",
-        email: "carlos@gmail.com",
+        email: "CARLOS@GMAIL.COM",
         librosPrestados: [3]
     },
 
     {
         id: 7,
         nombre: "Sofia",
-        email: "sofia@gmail.com",
+        email: "SOFIA@GMAIL.COM",
         librosPrestados: [7]
     },
 
     {
         id: 8,
         nombre: "Juan",
-        email: "juan@gmail.com",
+        email: "JUAN@GMAIL.COM",
         librosPrestados: [11]
     },
 
     {
         id: 9,
         nombre: "Lucia",
-        email: "lucia@gmail.com",
+        email: "LUCIA@GMAIL.COM",
         librosPrestados: [12, 13]
     },
 
     {
         id: 10,
         nombre: "Pedro",
-        email: "pedro@gmail.com",
+        email: "PEDRO@GMAIL.COM",
         librosPrestados: [14]
     }
 ];
