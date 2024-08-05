@@ -425,3 +425,62 @@ mostrarlo en la consola.
 }
 
 console.log(librosConPalabrasEnTitulo());
+
+
+///////////////////////////////////////////
+// 7. Cálculos Estadísticos
+//////////////////////////////////////////
+
+/*
+a) Desarrollar una función calcularEstadisticas() que utilice el objeto
+Math para calcular y mostrar:
+✓ Promedio de años de publicación de los libros.
+✓ Año de publicación más frecuente.
+✓ Diferencia en años entre el libro más antiguo y el más nuevo.
+*/
+
+const calcularEstadisticas = () => {
+
+    const aniosPublicacion = libros.map(libro => libro.anio);
+
+    // Calculando el promedio de años de publicación
+    const sumaAñosPublicacion = aniosPublicacion.reduce((acum, anio) => acum = acum + anio);
+    const promedioAñosPublicacion = Math.round(sumaAñosPublicacion / aniosPublicacion.length);
+    
+    // Calculando el año de publicación más frecuente
+    const anioMasFrecuente = aniosPublicacion.reduce((acum, anio) => {
+        acum[anio] = (acum[anio] || 0) + 1;
+        return acum;
+    });
+
+    // Diferencia en años entre el libro más antiguo y el más nuevo
+    const anioMasAntiguo = Math.min(...aniosPublicacion);
+    const anioMasNuevo = Math.max(...aniosPublicacion);
+    const diferenciaAnios = anioMasNuevo - anioMasAntiguo;
+    
+    return {
+        promedioAñosPublicacion,
+        anioMasFrecuente,
+        diferenciaAnios
+    }
+}
+
+///////////////////////////////////////////
+// 8. Manejo de Cadenas
+//////////////////////////////////////////
+
+/*
+Crear una función normalizarDatos() que utilice métodos de strings
+para:
+✓ Convertir todos los títulos a mayúsculas.
+✓ Eliminar espacios en blanco al inicio y final de los nombres de
+autores.
+✓ Formatear los emails de los usuarios a minúsculas.
+*/
+
+const normalizarDatos = () => {
+    const titulosAMayuscula = libros.map(libro => libro.titulo.toUpperCase());
+    console.log(titulosAMayuscula);
+    
+}
+normalizarDatos()
