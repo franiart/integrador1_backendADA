@@ -410,9 +410,9 @@ const librosConPalabrasEnTitulo = () => {
     const titulosLibros =  libros.filter(libro => {
         const titulo = libro.titulo;
 
-        const sinCaracteresEspeciales =  titulo.trim().match(/^[a-zA-Z\s]+$/g);
+        const sinCaracteresEspeciales =  titulo.match(/^[a-zA-Z\s]+$/g);
 
-        const palabras = titulo.trim().split(' ');
+        const palabras = titulo.split(' ');
 
         return sinCaracteresEspeciales && palabras.length > 1;
     });
