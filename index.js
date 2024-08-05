@@ -205,7 +205,7 @@ let usuarios = [
         id: 10,
         nombre: "Pedro",
         email: "PEDRO@GMAIL.COM",
-        librosPrestados: [14]
+        librosPrestados: []
     }
 ];
 
@@ -213,13 +213,11 @@ let usuarios = [
 ///////////////////////////////////////////
 // 2. Funciones de Gestión de Libros
 //////////////////////////////////////////
-
 /*
 Implementar una función agregarLibro(id, titulo, autor, anio, genero)
 que agregue un nuevo libro al array libros.
 */
 const agregarLibro = (id, titulo, autor, anio, genero) => libros.push({id, titulo, autor, anio, genero});
-console.log(agregarLibro(16, "hora loca", "juan carlos", 1678, "ficcion"));
 
 /*
 Crear una función buscarLibro(criterio, valor) que permita buscar
@@ -227,7 +225,6 @@ libros por título, autor o género utilizando el algoritmo de búsqueda
 lineal.
 */
 const buscarLibro = (criterio, valor) => libros.find(libro => libro[criterio] === valor);
-console.log(buscarLibro("titulo", "hora loca"));
 
 /*
 Desarrollar una función ordenarLibros(criterio) que ordene los libros
@@ -256,8 +253,6 @@ const ordenarLibros = (criterio) => {
     return libros
 }
 
-console.log(ordenarLibros("titulo"));
-
 /*
 Desarrollar una función borrarLibro(id) que elimine el libro que se le
 pase por parámetro.
@@ -266,20 +261,15 @@ const borrarLibro = (id) => {
     const index = libros.map(libro => libro.id).indexOf(id);
     if (index !== -1) {
         libros.splice(index, 1);
-        console.log(`El libro con id ${id} ha sido eliminado`);
+        return `El libro con id ${id} ha sido eliminado`;
     } else {
-        console.log(`El libro con id ${id} no se ha encontrado`);
+        return `El libro con id ${id} no se ha encontrado`;
     }
-
-    return libros
 }
-
-console.log(borrarLibro(5));
 
 ///////////////////////////////////////////
 // 3. Gestión de Usuarios
 //////////////////////////////////////////
-
 /*
 Implementar una función registrarUsuario(nombre, email) que
 agregue un nuevo usuario al array usuarios.
@@ -303,7 +293,10 @@ Implementar una función borrarUsuario(nombre, email) que elimine el
 usuario seleccionado.
 */
 const borrarUsuario = (nombre, email) => {
+    //Buscamos el indice del usuario que coincida con el nombre y el email introducidos
     const index = usuarios.findIndex(usuario => usuario.nombre === nombre && usuario.email === email);
+
+    // Si se encuentra el indice elimina el usuario y sino muestra un mensaje de que el usuario no fue encontrado
     if (index !== -1) {
         usuarios.splice(index, 1);
         console.log(`El usuario ${nombre} con email ${email} ha sido eliminado`);
@@ -315,7 +308,6 @@ const borrarUsuario = (nombre, email) => {
 ///////////////////////////////////////////
 // 4. Sistema de Préstamos
 //////////////////////////////////////////
-
 /*
 Desarrollar una función prestarLibro(idLibro, idUsuario) que marque
 un libro como no disponible y lo agregue a la lista de libros prestados
@@ -325,12 +317,14 @@ const prestarLibro = (idLibro, idUsuario) => {
     const book = libros.find(libro => libro.id === idLibro);
     const user = usuarios.find(usuario => usuario.id === idUsuario);
     
+    // Si el libro está disponible, cambia su estado y se anexa a los libros prestados del usuario,
+    //sino se muestra un mensaje de que el libro ya fue prestado
     if (book.disponible){
         book.disponible = false;
         user.librosPrestados.push(idLibro);
-        console.log(`El libro ${book.titulo} ha sido prestado al usuario ${user.nombre}`);
+        return `El libro ${book.titulo} ha sido prestado al usuario ${user.nombre}`;
     } else {
-        console.log(`El libro ${book.titulo} ya está prestado`);
+        return `El libro ${book.titulo} ya está prestado`;
     }
 }
 
@@ -339,10 +333,12 @@ Implementar una función devolverLibro(idLibro, idUsuario) que
 marque un libro como disponible y lo elimine de la lista de libros
 prestados del usuario.
 */
-
 const devolverLibro = (idLibro, idUsuario) => {
     const book = libros.find(libro => libro.id === idLibro);
     const user = usuarios.find(usuario => usuario.id === idUsuario);
+
+    // Si el libro no está disponible, cambia su estado y se elimina de los libros prestados del usuario,
+    //sino se muestra un mensaje de que el libro está disponible
 
     if(!book.disponible){
         book.disponible = true;
@@ -367,12 +363,17 @@ reporte con la siguiente información:
 */
 
 const generarReporteLibros = () => {
+
+    // Filtramos los libros prestados
     const librosPrestados = libros.filter(libro => !libro.disponible);
 
+    // Total de libros prestados
     const totalLibrosPrestados = librosPrestados.length;
 
+    // Total de libros
     const totalLibros = libros.length;
 
+    // Cantidad de libros por género
     const librosPorGenero = libros.reduce((acc, libro) => {
             acc[libro.genero] = (acc[libro.genero] || 0);
             acc[libro.genero]++;
@@ -393,12 +394,9 @@ const generarReporteLibros = () => {
     }
 }
 
-console.log(generarReporteLibros());
-
 ///////////////////////////////////////////
 // 6. Identificación Avanzada de libros
 //////////////////////////////////////////
-
 /*
 Implementar una función librosConPalabrasEnTitulo() que identifique
 y muestre todos los libros cuyo título contiene más de una palabra
@@ -407,13 +405,17 @@ y muestre todos los libros cuyo título contiene más de una palabra
 
 const librosConPalabrasEnTitulo = () => {
 
+    // Filtramos los libros
     const titulosLibros =  libros.filter(libro => {
         const titulo = libro.titulo;
 
+        // Removemos los caracteres especiales
         const sinCaracteresEspeciales =  titulo.match(/^[a-zA-Z\s]+$/g);
 
+        // Dividimos cada título en palabras
         const palabras = titulo.split(' ');
 
+        // Retorna los títulos que no contengan caracteres especiales y que contengan más de una palabra
         return sinCaracteresEspeciales && palabras.length > 1;
     });
 
@@ -488,4 +490,18 @@ const normalizarDatos = () => {
         eliminarEspaciosEnBlanco,
         emailAMinusculas
     }
+}
+
+///////////////////////////////////////////
+// 9. Interfaz de Usuario por Consola
+//////////////////////////////////////////ç
+/*
+Implementar una función menuPrincipal() que muestre un menú de
+opciones al usuario y permita interactuar con el sistema utilizando
+prompt().
+*/
+const menuPrincipal = () => {
+    console.log("Bienvenido al sistema de libros");
+    console.log("1. Agregar un libro");
+    
 }
