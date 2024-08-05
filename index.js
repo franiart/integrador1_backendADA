@@ -50,7 +50,7 @@ const libros = [
     },
     {
         id: 5,
-        titulo: "   1984  ",
+        titulo: " 1984 ",
         autor: "George Orwell",
         anio: 1949,
         genero: "Distopía",
@@ -394,3 +394,34 @@ const generarReporteLibros = () => {
 }
 
 console.log(generarReporteLibros());
+
+///////////////////////////////////////////
+// 6. Identificación Avanzada de libros
+//////////////////////////////////////////
+
+/*
+Implementar una función librosConPalabrasEnTitulo() que identifique
+y muestre todos los libros cuyo título contiene más de una palabra
+(no títulos que contengan números ni otros caracteres).
+*/
+
+const librosConPalabrasEnTitulo = () => {
+
+    const titulosLibros =  libros.filter(libro => {
+        const titulo = libro.titulo;
+
+        const sinCaracteresEspeciales =  titulo.trim().match(/^[a-zA-Z\s]+$/g);
+
+        const palabras = titulo.trim().split(' ');
+
+        return sinCaracteresEspeciales && palabras.length > 1;
+    });
+
+/*
+La función debe devolver un array con los títulos de esos libros y
+mostrarlo en la consola.
+*/
+    return titulosLibros.map(libro => libro.titulo);
+}
+
+console.log(librosConPalabrasEnTitulo());
