@@ -1,4 +1,5 @@
 const prompt = require("prompt-sync")({ sigint: true });
+const picocolors = require("picocolors");
 ///////////////////////////////////////////
 // 1. Estructura de Datos
 //////////////////////////////////////////
@@ -16,20 +17,20 @@ libros. Cada libro debe tener las siguientes propiedades:
 const libros = [
     {
         id: 1,
-        titulo: "El Señor de los Anillos",
+        titulo: "El Senior de los Anillos",
         autor: " J.R.R. Tolkien ",
         anio: 1954,
-        genero: "Fantasía",
-        disponible: true
+        genero: "Fantasia",
+        disponible: false
     },
 
     {
         id: 2,
-        titulo: "El Código Da Vinci",
+        titulo: "El Codigo Da Vinci",
         autor: " Dan Brown ",
         anio: 2003,
         genero: "Misterio",
-        disponible: true
+        disponible: false
     },
 
     {
@@ -38,7 +39,7 @@ const libros = [
         autor: " Mario Puzo ",
         anio: 1969,
         genero: "Drama",
-        disponible: true
+        disponible: false
     },
 
     {
@@ -46,39 +47,43 @@ const libros = [
         titulo: "El Nombre del Viento",
         autor: " Patrick Rothfuss ",
         anio: 2007,
-        genero: "Fantasía",
+        genero: "Fantasia",
         disponible: false
     },
+
     {
         id: 5,
         titulo: "1984",
         autor: " George Orwell ",
         anio: 1949,
-        genero: "Distopía",
+        genero: "Distopia",
         disponible: false
     },
+
     {
         id: 6,
         titulo: "El Hobbit",
         autor: " J.R.R. Tolkien ",
         anio: 1937,
-        genero: "Fantasía",
+        genero: "Fantasia",
         disponible: true
     },
+
     {
         id: 7,
         titulo: "Fahrenheit 451",
         autor: " Ray Bradbury ",
         anio: 1953,
-        genero: "Distopía",
+        genero: "Distopia",
         disponible: false
     },
+    
     {
         id: 8,
         titulo: "Guerra y paz",
-        autor: " León Tolstói ",
+        autor: " Leon Tolstoi ",
         anio: 1869,
-        genero: "Novela histórica",
+        genero: "Novela historica",
         disponible: true
     },
 
@@ -87,8 +92,8 @@ const libros = [
         titulo: "JavaScript: The Good Parts",
         autor: " Douglas Crockford ",
         anio: 2008,
-        genero: "Programación",
-        disponible: true
+        genero: "Programacion",
+        disponible: false
     },
 
     {
@@ -96,7 +101,7 @@ const libros = [
         titulo: "Eloquent JavaScript, 3rd Edition",
         autor: " Marijn Haverbeke ",
         anio: 2018,
-        genero: "Programación",
+        genero: "Programacion",
         disponible: true
     },
 
@@ -105,7 +110,7 @@ const libros = [
         titulo: "You Don't Know JS: ES6 & Beyond",
         autor: " Kyle Simpson ",
         anio: 2015,
-        genero: "Programación",
+        genero: "Programacion",
         disponible: true
     },
 
@@ -114,8 +119,8 @@ const libros = [
         titulo: "Clean Code: A Handbook of Agile Software Craftsmanship",
         autor: " Robert C. Martin ",
         anio: 2008,
-        genero: "Programación",
-        disponible: true
+        genero: "Programacion",
+        disponible: false
     },
 
     {
@@ -123,7 +128,7 @@ const libros = [
         titulo: "The Pragmatic Programmer: Your Journey to Mastery",
         autor: " Andrew Hunt, David Thomas ",
         anio: 1999,
-        genero: "Programación",
+        genero: "Programacion",
         disponible: true
     }
 ];
@@ -150,21 +155,21 @@ let usuarios = [
         id: 2,
         nombre: "Magenta",
         email: "MAGENTA@GMAIL.COM",
-        librosPrestados: [2, 6]
+        librosPrestados: [2]
     },
 
     {
         id: 3,
         nombre: "Daniel",
         email: "DANIEL@GMAIL.COM",
-        librosPrestados: [4, 8]
+        librosPrestados: [4]
     },
 
     {
         id: 4,
         nombre: "Luis",
         email: "LUIS@GMAIL.COM",
-        librosPrestados: [9, 10]
+        librosPrestados: [9]
     },
 
     {
@@ -185,21 +190,21 @@ let usuarios = [
         id: 7,
         nombre: "Sofia",
         email: "SOFIA@GMAIL.COM",
-        librosPrestados: [7]
+        librosPrestados: []
     },
 
     {
         id: 8,
         nombre: "Juan",
         email: "JUAN@GMAIL.COM",
-        librosPrestados: [11]
+        librosPrestados: []
     },
 
     {
         id: 9,
         nombre: "Lucia",
         email: "LUCIA@GMAIL.COM",
-        librosPrestados: [12, 13]
+        librosPrestados: [12]
     },
 
     {
@@ -225,8 +230,20 @@ Crear una función buscarLibro(criterio, valor) que permita buscar
 libros por título, autor o género utilizando el algoritmo de búsqueda
 lineal.
 */
-const buscarLibro = (criterio, valor) => libros.find(libro => libro[criterio] === valor);
+const buscarLibro = (criterio, valor) => libros.filter(libro => libro[criterio].trim().toLowerCase() === valor.trim().toLowerCase());
 
+/* 
+const buscarLibro = (criterio, valor) => {
+    return libros.filter(libro => {
+        if (typeof libro[criterio] === 'string') {
+            return libro[criterio].toLowerCase() === valor.toLowerCase();
+        }
+        return libro[criterio] === valor;
+    });
+};
+
+console.log(buscarLibro("titulo", "el senior de los anillos"));
+*/
 /*
 Desarrollar una función ordenarLibros(criterio) que ordene los libros
 por título o año utilizando el algoritmo de ordenamiento burbuja
@@ -262,9 +279,9 @@ const borrarLibro = (id) => {
     const index = libros.map(libro => libro.id).indexOf(id);
     if (index !== -1) {
         libros.splice(index, 1);
-        return `El libro con id ${id} ha sido eliminado`;
+        return picocolors.green(`El libro con id ${id} ha sido eliminado`);
     } else {
-        return `El libro con id ${id} no se ha encontrado`;
+        return picocolors.blue(`El libro con id ${id} no se ha encontrado`);
     }
 }
 
@@ -287,7 +304,7 @@ const mostrarTodosLosUsuarios = (usuarios) => usuarios
 Crear una función buscarUsuario(email) que devuelva la información
 de un usuario dado su email.
 */
-const buscarUsuario = (email) => usuarios.find(usuario => usuario.email === email);
+const buscarUsuario = (email) => usuarios.filter(usuario => usuario.email.toLowerCase() === email.toLowerCase());
 
 /*
 Implementar una función borrarUsuario(nombre, email) que elimine el
@@ -295,14 +312,14 @@ usuario seleccionado.
 */
 const borrarUsuario = (nombre, email) => {
     //Buscamos el indice del usuario que coincida con el nombre y el email introducidos
-    const index = usuarios.findIndex(usuario => usuario.nombre === nombre && usuario.email === email);
+    const index = usuarios.findIndex(usuario => usuario.nombre.toLowerCase() === nombre.toLowerCase() && usuario.email.toLowerCase() === email.toLowerCase());
 
     // Si se encuentra el indice elimina el usuario y sino muestra un mensaje de que el usuario no fue encontrado
     if (index !== -1) {
         usuarios.splice(index, 1);
-        console.log(`El usuario ${nombre} con email ${email} ha sido eliminado`);
+        console.log(picocolors.green(`El usuario ${nombre} con email ${email} ha sido eliminado`));
     } else {
-        console.log(`El usuario ${nombre} con email ${email} no se ha encontrado`);
+        console.log(picocolors.red(`El usuario ${nombre} con email ${email} no se ha encontrado`));
     }
 }
 
@@ -323,9 +340,9 @@ const prestarLibro = (idLibro, idUsuario) => {
     if (book.disponible){
         book.disponible = false;
         user.librosPrestados.push(idLibro);
-        return `El libro ${book.titulo} ha sido prestado al usuario ${user.nombre}`;
+        return picocolors.green(`El libro ${book.titulo} ha sido prestado al usuario ${user.nombre}`);
     } else {
-        return `El libro ${book.titulo} ya está prestado`;
+        return picocolors.blue(`El libro ${book.titulo} ya está prestado`);
     }
 }
 
@@ -344,9 +361,9 @@ const devolverLibro = (idLibro, idUsuario) => {
     if(!book.disponible){
         book.disponible = true;
         user.librosPrestados = user.librosPrestados.splice(idLibro, 1);
-        return `El libro ${book.titulo} ha sido devuelto por el usuario ${user.nombre}`;
+        return picocolors.green(`El libro ${book.titulo} ha sido devuelto por el usuario ${user.nombre}`);
     } else {
-        return `El libro ${book.titulo} ya está disponible`;
+        return picocolors.blue(`El libro ${book.titulo} ya está disponible`);
     }
 }
 
@@ -427,9 +444,6 @@ mostrarlo en la consola.
     return titulosLibros.map(libro => libro.titulo);
 }
 
-console.log(librosConPalabrasEnTitulo());
-
-
 ///////////////////////////////////////////
 // 7. Cálculos Estadísticos
 //////////////////////////////////////////
@@ -448,7 +462,7 @@ const calcularEstadisticas = () => {
 
     // Calculando el promedio de años de publicación
     const sumaAñosPublicacion = aniosPublicacion.reduce((acum, anio) => acum = acum + anio);
-    const promedioAñosPublicacion = Math.round(sumaAñosPublicacion / aniosPublicacion.length);
+    const promedioAniosPublicacion = Math.round(sumaAñosPublicacion / aniosPublicacion.length);
     
     // Calculando el año de publicación más frecuente
     const anioMasFrecuente = aniosPublicacion.reduce((acum, anio) => {
@@ -462,7 +476,7 @@ const calcularEstadisticas = () => {
     const diferenciaAnios = anioMasNuevo - anioMasAntiguo;
     
     return {
-        promedioAñosPublicacion,
+        promedioAniosPublicacion,
         anioMasFrecuente,
         diferenciaAnios
     }
@@ -505,23 +519,25 @@ const menuPrincipal = () => {
     let option;
 
     do {
-        option = prompt(`Seleccione una opción:
-        1. Agregar Libro
-        2. Buscar Libro
-        3. Ordenar Libros
-        4. Borrar Libro
-        5. Registrar Usuario
-        6. Mostrar todos los Usuarios
-        7. Buscar Usuario
-        8. Borrar Usuario
-        9. Prestar Libro
-        10. Devolver Libro
-        11. Generar Reporte de Libros
-        12. Identificación Avanzada de Libros
-        13. Cálculos Estadísticos
-        14. Normalizar Datos
-        15. Salir
-        Opción a Elegir: `);
+        option = prompt(picocolors.cyan(
+            `Seleccione una opción:
+            1. Agregar Libro
+            2. Buscar Libro
+            3. Ordenar Libros
+            4. Borrar Libro
+            5. Registrar Usuario
+            6. Mostrar todos los Usuarios
+            7. Buscar Usuario
+            8. Borrar Usuario
+            9. Prestar Libro
+            10. Devolver Libro
+            11. Generar Reporte de Libros
+            12. Identificación Avanzada de Libros
+            13. Cálculos Estadísticos
+            14. Normalizar Datos
+            15. Salir
+            Opción a Elegir: `
+        ));
 
         switch (option) {
             case '1':
@@ -530,26 +546,26 @@ const menuPrincipal = () => {
                 let autor = prompt("Ingrese autor del libro: ");
                 let anio = parseInt(prompt("Ingrese año de publicación del libro: "));
                 agregarLibro(id, titulo, autor, anio);
-                console.log("Libro agregado exitosamente.");
+                console.log(picocolors.green("Libro agregado exitosamente."));
                 break;
             case '2':
                 let criterioBusqueda = prompt("Ingrese criterio de búsqueda (titulo/autor/genero): ");
                 let valorBusqueda = prompt("Ingrese valor de búsqueda: ");
-                console.log(`Resultado de búsqueda: ${buscarLibro(criterioBusqueda, valorBusqueda)}`);
+                console.log(buscarLibro(criterioBusqueda, valorBusqueda));
                 break;
             case '3':
                 let criterioOrdenarLibro = prompt("Ingrese el criterio (titulo/anio) para odenar los libros: ");
                 console.log(ordenarLibros(criterioOrdenarLibro));
                 break;
             case '4':
-                let idLibroABorrar = prompt("Ingrese el id del libro que desea eliminar: ");
+                let idLibroABorrar = parseInt(prompt("Ingrese el id del libro que desea eliminar: "));
                 console.log(borrarLibro(idLibroABorrar));
                 break;
             case '5':
-                let nombreUsuario = parseInt(prompt("Ingrese el nombre del usuario a registrar: "));
-                let emailUsuario = parseInt(prompt("Ingrese el email del usuario a registrar: "));
+                let nombreUsuario = prompt("Ingrese el nombre del usuario a registrar: ");
+                let emailUsuario = prompt("Ingrese el email del usuario a registrar: ");
                 registrarUsuario(nombreUsuario, emailUsuario);
-                console.log("El usuario fue registrado exitosamente");
+                console.log(picocolors.green("El usuario fue registrado exitosamente"));
                 break;
             case '6':
                 console.log(mostrarTodosLosUsuarios(usuarios));
@@ -565,11 +581,31 @@ const menuPrincipal = () => {
                 break;
             case '9':
                 let idLibroAPrestar = parseInt(prompt("Ingrese el id del libro a actualizar: "));
-                let idUsuario = prompt("Ingrese el id del usuario al que se le prestará el libro: ");
+                let idUsuario = parseInt(prompt("Ingrese el id del usuario al que se le prestará el libro: "));
                 console.log(prestarLibro(idLibroAPrestar, idUsuario));
                 break;
+            case '10':
+                let idLibroAdevolver = parseInt(prompt("Ingrese el id del libro a devolver: "));
+                let idUser = parseInt(prompt("Ingrese el id del usuario que devolverá el libro: "));
+                console.log(devolverLibro(idLibroAdevolver, idUser));
+                break;
+            case '11':
+                console.log(generarReporteLibros());
+                break;
+            case '12':
+                console.log(librosConPalabrasEnTitulo());
+                break;
+            case '13':
+                console.log(calcularEstadisticas());
+                break;
+            case '14':
+                console.log(normalizarDatos());
+                break;
+            case '15':
+                console.log(picocolors.italic("Saliendo del menú principal"));
+                break;
             default:
-                alert("Opción no válida. Intente de nuevo.");
+                console.log(picocolors.red("Opción no válida. Intente de nuevo."));
         }
     } while (option !== '15');
 };

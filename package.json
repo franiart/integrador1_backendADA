@@ -9,6 +9,7 @@
   "author": "Fran",
   "license": "ISC",
   "dependencies": {
-    "prompt-sync": "^4.2.0"
+    "picocolors": "1.0.1",
+    "prompt-sync": "4.2.0"
   }
 }
