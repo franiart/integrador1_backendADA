@@ -1,3 +1,4 @@
+const prompt = require("prompt-sync")({ sigint: true });
 ///////////////////////////////////////////
 // 1. Estructura de Datos
 //////////////////////////////////////////
@@ -501,7 +502,77 @@ opciones al usuario y permita interactuar con el sistema utilizando
 prompt().
 */
 const menuPrincipal = () => {
-    console.log("Bienvenido al sistema de libros");
-    console.log("1. Agregar un libro");
-    
-}
+    let option;
+
+    do {
+        option = prompt(`Seleccione una opción:
+        1. Agregar Libro
+        2. Buscar Libro
+        3. Ordenar Libros
+        4. Borrar Libro
+        5. Registrar Usuario
+        6. Mostrar todos los Usuarios
+        7. Buscar Usuario
+        8. Borrar Usuario
+        9. Prestar Libro
+        10. Devolver Libro
+        11. Generar Reporte de Libros
+        12. Identificación Avanzada de Libros
+        13. Cálculos Estadísticos
+        14. Normalizar Datos
+        15. Salir
+        Opción a Elegir: `);
+
+        switch (option) {
+            case '1':
+                let id = parseInt(prompt("Ingrese id del libro: "));
+                let titulo = prompt("Ingrese título del libro: ");
+                let autor = prompt("Ingrese autor del libro: ");
+                let anio = parseInt(prompt("Ingrese año de publicación del libro: "));
+                agregarLibro(id, titulo, autor, anio);
+                console.log("Libro agregado exitosamente.");
+                break;
+            case '2':
+                let criterioBusqueda = prompt("Ingrese criterio de búsqueda (titulo/autor/genero): ");
+                let valorBusqueda = prompt("Ingrese valor de búsqueda: ");
+                console.log(`Resultado de búsqueda: ${buscarLibro(criterioBusqueda, valorBusqueda)}`);
+                break;
+            case '3':
+                let criterioOrdenarLibro = prompt("Ingrese el criterio (titulo/anio) para odenar los libros: ");
+                console.log(ordenarLibros(criterioOrdenarLibro));
+                break;
+            case '4':
+                let idLibroABorrar = prompt("Ingrese el id del libro que desea eliminar: ");
+                console.log(borrarLibro(idLibroABorrar));
+                break;
+            case '5':
+                let nombreUsuario = parseInt(prompt("Ingrese el nombre del usuario a registrar: "));
+                let emailUsuario = parseInt(prompt("Ingrese el email del usuario a registrar: "));
+                registrarUsuario(nombreUsuario, emailUsuario);
+                console.log("El usuario fue registrado exitosamente");
+                break;
+            case '6':
+                console.log(mostrarTodosLosUsuarios(usuarios));
+                break;
+            case '7':
+                let emailABuscar = prompt("Ingrese el email del usuario a buscar: ");
+                console.log(buscarUsuario(emailABuscar));
+                break;
+            case '8':
+                let nombreUsuarioABorrar = prompt("Ingrese el nombre del usuario a borrar: ");
+                let emailUsuarioABuscar = prompt("Ingrese el email del usuario a borrar: ");
+                console.log(borrarUsuario(nombreUsuarioABorrar, emailUsuarioABuscar));
+                break;
+            case '9':
+                let idLibroAPrestar = parseInt(prompt("Ingrese el id del libro a actualizar: "));
+                let idUsuario = prompt("Ingrese el id del usuario al que se le prestará el libro: ");
+                console.log(prestarLibro(idLibroAPrestar, idUsuario));
+                break;
+            default:
+                alert("Opción no válida. Intente de nuevo.");
+        }
+    } while (option !== '15');
+};
+
+// Ejecutar el menú principal
+menuPrincipal();
