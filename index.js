@@ -232,18 +232,6 @@ lineal.
 */
 const buscarLibro = (criterio, valor) => libros.filter(libro => libro[criterio].trim().toLowerCase() === valor.trim().toLowerCase());
 
-/* 
-const buscarLibro = (criterio, valor) => {
-    return libros.filter(libro => {
-        if (typeof libro[criterio] === 'string') {
-            return libro[criterio].toLowerCase() === valor.toLowerCase();
-        }
-        return libro[criterio] === valor;
-    });
-};
-
-console.log(buscarLibro("titulo", "el senior de los anillos"));
-*/
 /*
 Desarrollar una función ordenarLibros(criterio) que ordene los libros
 por título o año utilizando el algoritmo de ordenamiento burbuja
